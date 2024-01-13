@@ -48,8 +48,13 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setReplacementCost(filmResult.getDouble("replacement_cost"));
 			film.setRating(filmResult.getString("rating"));
 			film.setSpecialFeatures(filmResult.getString("special_features"));
+			
 			// Set actors
 			film.setActors(findActorsByFilmId(filmId));
+			
+			// Set categories
+            List<String> categories = findFilmCategories(filmId);
+            film.setCategories(categories);
 
 		}
 		filmResult.close();
@@ -102,7 +107,7 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	}
 
 	@Override
-	public List<Film> findFilmByKeyword(String keyword) throws SQLException {
+	public List<Film> findFilmByKeyword(String keyword) throws SQLException{
 		List<Film> films = new ArrayList<>();
 		Connection connection = DriverManager.getConnection(URL, USER, PWD);
 		String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
@@ -140,8 +145,30 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			if (connection != null) {
 				connection.close();
 			}
-		}
+		} 
+		
 
 		return films;
+	}
+
+	public List<String> findFilmCategories(int filmId) throws SQLException {
+		List<String> categories = new ArrayList<>();
+		Connection connection = DriverManager.getConnection(URL, USER, PWD);
+		String sql = "SELECT category.name FROM category JOIN film_category ON category.id = film_category.category_id WHERE film_category.film_id = ?";
+
+		PreparedStatement statement = connection.prepareStatement(sql);
+		statement.setInt(1, filmId);
+		ResultSet resultSet = statement.executeQuery();
+		while (resultSet.next()) {
+			categories.add(resultSet.getString("name"));
+		}
+
+		
+		resultSet.close();
+		statement.close();
+		connection.close();
+
+		return categories;
+
 	}
 }

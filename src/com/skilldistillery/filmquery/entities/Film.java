@@ -16,6 +16,7 @@ public class Film {
 	private String rating; 
 	private String specialFeatures;
 	private List<Actor> actors; 
+	private List<String> categories;
 
 	public Film() {
 
@@ -134,17 +135,30 @@ public class Film {
 	public void setActors(List<Actor> actors) {
 		this.actors = actors;
 	}
+	
+	public List<String> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<String> categories) {
+        this.categories = categories;
+    }
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Film ID: ").append(id).append("\nTitle: ").append(title).append("\nDescription: ")
-				.append(description).append("\nRelease Year: ").append(releaseYear).append("\nLanguage ID: ")
-				.append(languageId).append("\nRental Duration: ").append(rentalDuration).append("\nRental Rate: ")
-				.append(rentalRate).append("\nLength: ").append(length).append("\nReplacement Cost: ")
-				.append(replacementCost).append("\nRating: ").append(rating).append("\nSpecial Features: ")
-				.append(specialFeatures).append("\nActors: ");
-
+		sb.append("Film ID: ").append(id)
+		.append("\nTitle: ").append(title)
+		.append("\nDescription: ").append(description)
+		.append("\nRelease Year: ").append(releaseYear)
+		.append("\nLanguage ID: ").append(languageId)
+		.append("\nRental Duration: ").append(rentalDuration)
+		.append("\nRental Rate: ").append(rentalRate)
+		.append("\nLength: ").append(length)
+		.append("\nReplacement Cost: ").append(replacementCost)
+		.append("\nRating: ").append(rating)
+		.append("\nSpecial Features: ").append(specialFeatures)
+		.append("\nActors: ");		
 		if (actors != null && !actors.isEmpty()) {
 			for (Actor actor : actors) {
 				sb.append("\n\t").append(actor.toString());
@@ -152,6 +166,18 @@ public class Film {
 		} else {
 			sb.append("No actors found");
 		}
+		
+		// Adding categories
+	    if (categories != null && !categories.isEmpty()) {
+	        sb.append("\nCategories: ");
+	        for (String category : categories) {
+	            sb.append(category).append(", ");
+	        }
+	        // Remove the trailing comma and space
+	        sb.setLength(sb.length() - 2);
+	    } else {
+	        sb.append("\nCategories: No categories found");
+	    }
 
 		return sb.toString();
 	}
