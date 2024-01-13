@@ -18,6 +18,7 @@ public class Film {
 	private List<Actor> actors; 
 	private String language;
 	private List<String> categories;
+	private List<InventoryItem> inventoryItems;
 	
 
 	public Film() {
@@ -152,6 +153,13 @@ public class Film {
 
     public void setCategories(List<String> categories) {
         this.categories = categories;
+    }
+    public List<InventoryItem> getInventoryItems() {
+        return inventoryItems;
+    }
+
+    public void setInventoryItems(List<InventoryItem> inventoryItems) {
+        this.inventoryItems = inventoryItems;
     }
 
 	@Override

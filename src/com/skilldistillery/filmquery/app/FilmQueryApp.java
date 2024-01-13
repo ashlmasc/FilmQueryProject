@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
 import com.skilldistillery.filmquery.entities.Film;
+import com.skilldistillery.filmquery.entities.InventoryItem;
 
 public class FilmQueryApp {
 
@@ -140,6 +141,15 @@ public class FilmQueryApp {
 	    if (showAllDetails) {
 	        // Print all details of the film
 	        System.out.println(film);
+	        System.out.println("Inventory Items:");
+	        List<InventoryItem> inventoryItems = film.getInventoryItems();
+	        if (inventoryItems != null && !inventoryItems.isEmpty()) {
+	            for (InventoryItem item : inventoryItems) {
+	                System.out.println("\t" + item);
+	            }
+	        } else {
+	            System.out.println("\tNo inventory items found");
+	        }
 	    } else {
 	        // Print basic details of the film
 	        System.out.println("Title: " + film.getTitle());
