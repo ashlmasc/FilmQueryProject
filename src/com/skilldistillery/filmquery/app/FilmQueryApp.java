@@ -63,11 +63,34 @@ public class FilmQueryApp {
 		System.out.println("---------------------------------------------");
 		System.out.println("|                Menu Options               |");
 		System.out.println("---------------------------------------------");
-		System.out.println("|  1. Lookup a film by its ID              |");
-		System.out.println("|  2. Lookup a film by a search keyword    |");
+		System.out.println("|  1. Lookup a film by its ID               |");
+		System.out.println("|  2. Lookup a film by a search keyword     |");
 		System.out.println("|  3. Exit the application                  |");
 		System.out.println("---------------------------------------------");
 		System.out.println("Enter your choice: ");
+	}
+	
+	private void showFilmSubmenu(Scanner input, Film film) {
+	    System.out.println("1. Return to main menu");
+	    System.out.println("2. View all film details");
+	    System.out.print("Enter your choice: ");
+
+	    int choice = input.nextInt();
+	    input.nextLine();
+
+	    switch (choice) {
+	        case 1:
+	            // Return to main menu
+	            break;
+	        case 2:
+	            // Show all details of the film
+	            displayFilmDetails(film, true);
+	            break;
+	        default:
+	            System.out.println("Invalid option. Please try again.");
+	            showFilmSubmenu(input, film); // Re-prompt if invalid option
+	            break;
+	    }
 	}
 
 	private int getUserChoice(Scanner input) {
@@ -84,15 +107,17 @@ public class FilmQueryApp {
 		Film film = new Film();
 		try {
 			film = db.findFilmById(filmId);
+			if (film != null) {
+	            displayFilmDetails(film, false); // Initially show basic details
+	            showFilmSubmenu(input, film); // Show submenu for more options
+	        } else {
+	            System.out.println("Film not found.");
+	        }
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Error occurred while accessing the database.");
-		}
-		if (film != null) {
-			displayFilmDetails(film);
-		} else {
-			System.out.println("Film not found.");
 		}
 	}
 
@@ -105,17 +130,25 @@ public class FilmQueryApp {
 			System.out.println("No films found with the keyword: " + keyword);
 		} else {
 			for (Film film : films) {
-			    displayFilmDetails(film);
+			    displayFilmDetails(film, false);
 			    System.out.println(); 
 			}
 		}
 	}
 	
-	private void displayFilmDetails(Film film) {
-	    System.out.println("Title: " + film.getTitle());
-	    System.out.println("Year: " + film.getReleaseYear());
-	    System.out.println("Rating: " + film.getRating());
-	    System.out.println("Description: " + film.getDescription());
-	    System.out.println("Language: " + film.getLanguage());
+	private void displayFilmDetails(Film film, boolean showAllDetails) {
+	    if (showAllDetails) {
+	        // Print all details of the film
+	        System.out.println(film);
+	    } else {
+	        // Print basic details of the film
+	        System.out.println("Title: " + film.getTitle());
+	        System.out.println("Year: " + film.getReleaseYear());
+	        System.out.println("Rating: " + film.getRating());
+	        System.out.println("Description: " + film.getDescription());
+	        System.out.println("Language: " + film.getLanguage());
+	        System.out.println("Cast: " + film.getActors());
+	       
+	    }
 	}
 }

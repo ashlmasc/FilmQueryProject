@@ -172,11 +172,11 @@ public class Film {
 		.append("\nActors: ");		
 		if (actors != null && !actors.isEmpty()) {
 			for (Actor actor : actors) {
-				sb.append("\n\t").append(actor.toString());
-			}
-		} else {
-			sb.append("No actors found");
-		}
+		            sb.append("\n\t").append(actor.toString());
+		        }
+		    } else {
+		        sb.append("No actors found");
+		    }
 		
 		// Adding categories
 	    if (categories != null && !categories.isEmpty()) {

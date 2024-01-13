@@ -39,6 +39,6 @@ public class Actor {
 
 	@Override
 	public String toString() {
-		return "Name: " + firstName + " " + lastName;
+		return "Name: " + firstName + " " + lastName + "\n";
 	}
 }
