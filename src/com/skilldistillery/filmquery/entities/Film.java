@@ -5,18 +5,22 @@ import java.util.Objects;
 
 public class Film {
 	private int id;
-    private String title;
-    private String description;
-    private Integer releaseYear; // i think int for possible null values
-    private int languageId;
-    private int rentalDuration;
-    private double rentalRate;
-    private Integer length; // i think int for nullable field
-    private double replacementCost;
-    private String rating; // Enum can be handled as String in Java per instructor with convo with zach
-    private String specialFeatures; // not positive on string
-    private List<Actor> actors; // List of actors
-    
+	private String title;
+	private String description;
+	private Integer releaseYear; 
+	private int languageId;
+	private int rentalDuration;
+	private double rentalRate;
+	private Integer length; 
+	private double replacementCost;
+	private String rating; 
+	private String specialFeatures;
+	private List<Actor> actors; 
+
+	public Film() {
+
+	}
+
 	public Film(int id, String title, String description, Integer releaseYear, int languageId, int rentalDuration,
 			double rentalRate, Integer length, double replacementCost, String rating, String specialFeatures,
 			List<Actor> actors) {
@@ -131,13 +135,25 @@ public class Film {
 		this.actors = actors;
 	}
 
-	// Need to make more better!!!!
 	@Override
 	public String toString() {
-		return "Film [id=" + id + ", title=" + title + ", description=" + description + ", releaseYear=" + releaseYear
-				+ ", languageId=" + languageId + ", rentalDuration=" + rentalDuration + ", rentalRate=" + rentalRate
-				+ ", length=" + length + ", replacementCost=" + replacementCost + ", rating=" + rating
-				+ ", specialFeatures=" + specialFeatures + ", actors=" + actors + "]";
+		StringBuilder sb = new StringBuilder();
+		sb.append("Film ID: ").append(id).append("\nTitle: ").append(title).append("\nDescription: ")
+				.append(description).append("\nRelease Year: ").append(releaseYear).append("\nLanguage ID: ")
+				.append(languageId).append("\nRental Duration: ").append(rentalDuration).append("\nRental Rate: ")
+				.append(rentalRate).append("\nLength: ").append(length).append("\nReplacement Cost: ")
+				.append(replacementCost).append("\nRating: ").append(rating).append("\nSpecial Features: ")
+				.append(specialFeatures).append("\nActors: ");
+
+		if (actors != null && !actors.isEmpty()) {
+			for (Actor actor : actors) {
+				sb.append("\n\t").append(actor.toString());
+			}
+		} else {
+			sb.append("No actors found");
+		}
+
+		return sb.toString();
 	}
 
 	@Override
@@ -163,5 +179,4 @@ public class Film {
 				&& Double.doubleToLongBits(replacementCost) == Double.doubleToLongBits(other.replacementCost)
 				&& Objects.equals(specialFeatures, other.specialFeatures) && Objects.equals(title, other.title);
 	}
-    	
 }
