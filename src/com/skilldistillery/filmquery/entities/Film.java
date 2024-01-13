@@ -16,7 +16,9 @@ public class Film {
 	private String rating; 
 	private String specialFeatures;
 	private List<Actor> actors; 
+	private String language;
 	private List<String> categories;
+	
 
 	public Film() {
 
@@ -136,6 +138,14 @@ public class Film {
 		this.actors = actors;
 	}
 	
+	public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+	
 	public List<String> getCategories() {
         return categories;
     }
@@ -158,6 +168,7 @@ public class Film {
 		.append("\nReplacement Cost: ").append(replacementCost)
 		.append("\nRating: ").append(rating)
 		.append("\nSpecial Features: ").append(specialFeatures)
+		.append("\nLanguage: ").append(language)
 		.append("\nActors: ");		
 		if (actors != null && !actors.isEmpty()) {
 			for (Actor actor : actors) {

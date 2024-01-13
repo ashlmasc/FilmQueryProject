@@ -30,7 +30,8 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		Connection connection = DriverManager.getConnection(URL, USER, PWD);
 
-		String sql = "SELECT * FROM film WHERE id = ?";
+		//update sql statement for user story 4
+		String sql = "SELECT film.*, language.name AS language_name FROM film JOIN language ON film.language_id = language.id WHERE film.id = ?";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		statement.setInt(1, filmId);
@@ -55,6 +56,9 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			// Set categories
             List<String> categories = findFilmCategories(filmId);
             film.setCategories(categories);
+            
+            // Set language
+            film.setLanguage(filmResult.getString("language_name"));
 
 		}
 		filmResult.close();

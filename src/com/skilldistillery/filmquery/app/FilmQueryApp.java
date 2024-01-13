@@ -116,5 +116,6 @@ public class FilmQueryApp {
 	    System.out.println("Year: " + film.getReleaseYear());
 	    System.out.println("Rating: " + film.getRating());
 	    System.out.println("Description: " + film.getDescription());
+	    System.out.println("Language: " + film.getLanguage());
 	}
 }
