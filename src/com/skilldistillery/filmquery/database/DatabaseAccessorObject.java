@@ -110,11 +110,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 	public List<Film> findFilmByKeyword(String keyword) throws SQLException{
 		List<Film> films = new ArrayList<>();
 		Connection connection = DriverManager.getConnection(URL, USER, PWD);
-		String sql = "SELECT * FROM film WHERE title LIKE ? OR description LIKE ?";
+		String sql = "SELECT * FROM film WHERE LOWER(title) LIKE ? OR LOWER(description) LIKE ?";
 
 		try (PreparedStatement statement = connection.prepareStatement(sql)) {
 
-			String searchKeyword = "%" + keyword + "%";
+			String searchKeyword = "%" + keyword.toLowerCase() + "%";
 			statement.setString(1, searchKeyword);
 			statement.setString(2, searchKeyword);
 

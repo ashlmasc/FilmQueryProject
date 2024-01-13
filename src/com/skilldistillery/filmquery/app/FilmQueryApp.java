@@ -87,9 +87,10 @@ public class FilmQueryApp {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.out.println("Error occurred while accessing the database.");
 		}
 		if (film != null) {
-			System.out.println(film);
+			displayFilmDetails(film);
 		} else {
 			System.out.println("Film not found.");
 		}
@@ -104,8 +105,16 @@ public class FilmQueryApp {
 			System.out.println("No films found with the keyword: " + keyword);
 		} else {
 			for (Film film : films) {
-				System.out.println(film);
+			    displayFilmDetails(film);
+			    System.out.println(); 
 			}
 		}
+	}
+	
+	private void displayFilmDetails(Film film) {
+	    System.out.println("Title: " + film.getTitle());
+	    System.out.println("Year: " + film.getReleaseYear());
+	    System.out.println("Rating: " + film.getRating());
+	    System.out.println("Description: " + film.getDescription());
 	}
 }
