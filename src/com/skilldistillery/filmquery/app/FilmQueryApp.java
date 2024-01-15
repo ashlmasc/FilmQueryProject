@@ -68,16 +68,17 @@ public class FilmQueryApp {
 		System.out.println("|  2. Lookup a film by a search keyword     |");
 		System.out.println("|  3. Exit the application                  |");
 		System.out.println("---------------------------------------------");
-		System.out.println("Enter your choice: ");
+		
 	}
 	
 	private void showFilmSubmenu(Scanner input, Film film) {
-	    System.out.println("1. Return to main menu");
-	    System.out.println("2. View all film details");
-	    System.out.print("Enter your choice: ");
-
-	    int choice = input.nextInt();
-	    input.nextLine();
+		System.out.println("---------------------------------");
+		System.out.println("|        Sub-Menu Options       |");
+		System.out.println("---------------------------------");
+	    System.out.println("|   1. Return to main menu      |");
+	    System.out.println("|   2. View all film details    |");
+	    System.out.println("---------------------------------");
+	    int choice = getValidIntegerInput(input, "Enter your choice: ");
 
 	    switch (choice) {
 	        case 1:
@@ -95,15 +96,11 @@ public class FilmQueryApp {
 	}
 
 	private int getUserChoice(Scanner input) {
-		int choice = input.nextInt();
-		input.nextLine();
-		return choice;
+		return getValidIntegerInput(input, "Enter your choice: ");
 	}
 
 	private void lookupFilmById(Scanner input) {
-		System.out.print("Enter the film ID: ");
-		int filmId = input.nextInt();
-		input.nextLine();
+		int filmId = getValidIntegerInput(input, "Enter the film ID: ");
 
 		Film film = new Film();
 		try {
@@ -160,5 +157,17 @@ public class FilmQueryApp {
 	        System.out.println("Cast: " + film.getActors());
 	       
 	    }
+	}
+	
+	private int getValidIntegerInput(Scanner input, String promptMessage) {
+	    System.out.print(promptMessage);
+	    while (!input.hasNextInt()) {
+	        System.out.println("Invalid input. Please enter a numeric value.");
+	        input.next(); 
+	        System.out.print(promptMessage);
+	    }
+	    int validInput = input.nextInt();
+	    input.nextLine(); 
+	    return validInput;
 	}
 }
