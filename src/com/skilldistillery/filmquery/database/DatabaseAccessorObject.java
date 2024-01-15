@@ -31,7 +31,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 
 		Connection connection = DriverManager.getConnection(URL, USER, PWD);
 
-		//update sql statement for user story 4
 		String sql = "SELECT film.*, language.name AS language_name FROM film JOIN language ON film.language_id = language.id WHERE film.id = ?";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
@@ -51,26 +50,20 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 			film.setRating(filmResult.getString("rating"));
 			film.setSpecialFeatures(filmResult.getString("special_features"));
 			
-			// Set actors
 			film.setActors(findActorsByFilmId(filmId));
 			
-			// Set categories
             List<String> categories = findFilmCategories(filmId);
             film.setCategories(categories);
             
-            // Set language
             film.setLanguage(filmResult.getString("language_name"));
             
-            // Fetch and set inventory items
             List<InventoryItem> inventoryItems = findInventoryByFilmId(filmId);
             film.setInventoryItems(inventoryItems);
-
 		}
 		filmResult.close();
 		statement.close();
 		connection.close();
 		return film;
-
 	}
 
 	public Actor findActorById(int actorId) throws SQLException {
@@ -84,14 +77,12 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		ResultSet actorResult = statement.executeQuery();
 		if (actorResult.next()) {
 			actor = new Actor(actorResult.getInt("id"), actorResult.getString("first_name"),
-					actorResult.getString("last_name")); // Create the object //
+					actorResult.getString("last_name")); 
 		}
-
 		actorResult.close();
 		statement.close();
 		connection.close();
 		return actor;
-
 	}
 
 	public List<Actor> findActorsByFilmId(int filmId) throws SQLException {
@@ -155,8 +146,6 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 				connection.close();
 			}
 		} 
-		
-
 		return films;
 	}
 
@@ -171,14 +160,11 @@ public class DatabaseAccessorObject implements DatabaseAccessor {
 		while (resultSet.next()) {
 			categories.add(resultSet.getString("name"));
 		}
-
-		
 		resultSet.close();
 		statement.close();
 		connection.close();
 
 		return categories;
-
 	}
 	
 	 public List<InventoryItem> findInventoryByFilmId(int filmId) throws SQLException {

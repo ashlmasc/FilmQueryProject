@@ -186,13 +186,11 @@ public class Film {
 		        sb.append("No actors found");
 		    }
 		
-		// Adding categories
 	    if (categories != null && !categories.isEmpty()) {
 	        sb.append("\nCategory: ");
 	        for (String category : categories) {
 	            sb.append(category).append(", ");
 	        }
-	        // Remove the trailing comma and space
 	        sb.setLength(sb.length() - 2);
 	    } else {
 	        sb.append("\nCategories: No categories found");

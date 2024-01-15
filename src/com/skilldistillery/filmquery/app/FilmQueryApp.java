@@ -7,7 +7,6 @@ import java.util.Scanner;
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
 import com.skilldistillery.filmquery.entities.Actor;
-import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 import com.skilldistillery.filmquery.entities.InventoryItem;
 
@@ -21,10 +20,10 @@ public class FilmQueryApp {
 		app.launch();
 	}
 
-	private void test() throws SQLException {
-		Film film = db.findFilmById(1);
-		System.out.println(film);
-	}
+//	private void test() throws SQLException {
+//		Film film = db.findFilmById(1);
+//		System.out.println(film);
+//	}
 
 	private void launch() throws SQLException {
 		Scanner input = new Scanner(System.in);
@@ -51,9 +50,7 @@ public class FilmQueryApp {
 				System.out.println("Invalid option. Please try again");
 				break;
 			}
-
 		}
-
 		input.close();
 		System.out.println("Application exited. Goodbye!");
 	}
@@ -85,15 +82,13 @@ public class FilmQueryApp {
 
 	    switch (choice) {
 	        case 1:
-	            // Return to main menu
 	            break;
 	        case 2:
-	            // Show all details of the film
 	            displayFilmDetails(film, true);
 	            break;
 	        default:
 	            System.out.println("Invalid option. Please try again.\n");
-	            showFilmSubmenu(input, film); // Re-prompt if invalid option
+	            showFilmSubmenu(input, film); 
 	            break;
 	    }
 	}
@@ -109,14 +104,13 @@ public class FilmQueryApp {
 		try {
 			film = db.findFilmById(filmId);
 			if (film != null) {
-	            displayFilmDetails(film, false); // Initially show basic details
-	            showFilmSubmenu(input, film); // Show submenu for more options
+	            displayFilmDetails(film, false);
+	            showFilmSubmenu(input, film); 
 	        } else {
 	            System.out.println("Film not found.");
 	        }
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			System.out.println("Error occurred while accessing the database.");
 		}
@@ -139,7 +133,6 @@ public class FilmQueryApp {
 	
 	private void displayFilmDetails(Film film, boolean showAllDetails) {
 	    if (showAllDetails) {
-	        // Print all details of the film
 	        System.out.println(film);
 	        System.out.println("Inventory Items:");
 	        List<InventoryItem> inventoryItems = film.getInventoryItems();
@@ -153,7 +146,6 @@ public class FilmQueryApp {
 	        System.out.println();
 	        System.out.println();
 	    } else {
-	        // Print basic details of the film
 	        System.out.println("Title: " + film.getTitle());
 	        System.out.println("Year: " + film.getReleaseYear());
 	        System.out.println("Rating: " + film.getRating());
@@ -162,7 +154,7 @@ public class FilmQueryApp {
 	        System.out.print("Cast:");
 	        if (film.getActors() != null && !film.getActors().isEmpty()) {
 	            for (Actor actor : film.getActors()) {
-	                System.out.print(actor); // uses the Actor class's toString() method but gets rid of commas and brackets
+	                System.out.print(actor); 
 	            }
 	        } else {
 	            System.out.println("\tNo actors found");

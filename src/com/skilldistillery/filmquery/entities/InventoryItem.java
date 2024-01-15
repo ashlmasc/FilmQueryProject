@@ -9,7 +9,6 @@ public class InventoryItem {
         this.condition = condition;
     }
 
-    
     public int getId() {
         return id;
     }
