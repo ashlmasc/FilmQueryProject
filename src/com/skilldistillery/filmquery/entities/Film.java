@@ -171,16 +171,16 @@ public class Film {
 		.append("\nRelease Year: ").append(releaseYear)
 		.append("\nLanguage ID: ").append(languageId)
 		.append("\nRental Duration: ").append(rentalDuration)
-		.append("\nRental Rate: ").append(rentalRate)
-		.append("\nLength: ").append(length)
-		.append("\nReplacement Cost: ").append(replacementCost)
+		.append("\nRental Rate: ").append("$").append(rentalRate)
+		.append("\nLength: ").append(length).append(" minutes")
+		.append("\nReplacement Cost: ").append("$").append(replacementCost)
 		.append("\nRating: ").append(rating)
 		.append("\nSpecial Features: ").append(specialFeatures)
 		.append("\nLanguage: ").append(language)
 		.append("\nActors: ");		
 		if (actors != null && !actors.isEmpty()) {
 			for (Actor actor : actors) {
-		            sb.append("\n\t").append(actor.toString());
+		            sb.append(actor.toString());
 		        }
 		    } else {
 		        sb.append("No actors found");
@@ -188,7 +188,7 @@ public class Film {
 		
 		// Adding categories
 	    if (categories != null && !categories.isEmpty()) {
-	        sb.append("\nCategories: ");
+	        sb.append("\nCategory: ");
 	        for (String category : categories) {
 	            sb.append(category).append(", ");
 	        }

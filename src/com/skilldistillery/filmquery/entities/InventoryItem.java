@@ -28,7 +28,7 @@ public class InventoryItem {
 
     @Override
     public String toString() {
-        return "InventoryItem ID: " + id + ", Condition: " + condition;
+        return "ID: " + id + ", Condition: " + condition;
     }
 }
 

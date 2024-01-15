@@ -6,6 +6,8 @@ import java.util.Scanner;
 
 import com.skilldistillery.filmquery.database.DatabaseAccessor;
 import com.skilldistillery.filmquery.database.DatabaseAccessorObject;
+import com.skilldistillery.filmquery.entities.Actor;
+import com.skilldistillery.filmquery.entities.Actor;
 import com.skilldistillery.filmquery.entities.Film;
 import com.skilldistillery.filmquery.entities.InventoryItem;
 
@@ -61,13 +63,14 @@ public class FilmQueryApp {
 	}
 
 	private void displayMenu() {
-		System.out.println("---------------------------------------------");
-		System.out.println("|                Menu Options               |");
-		System.out.println("---------------------------------------------");
-		System.out.println("|  1. Lookup a film by its ID               |");
-		System.out.println("|  2. Lookup a film by a search keyword     |");
-		System.out.println("|  3. Exit the application                  |");
-		System.out.println("---------------------------------------------");
+		System.out.println("=========================================");
+	    System.out.println("|              Film Query               |");
+	    System.out.println("=========================================");
+	    System.out.println("| Options:                              |");
+	    System.out.println("|   1. Lookup a film by its ID          |");
+	    System.out.println("|   2. Lookup a film by a search keyword|");
+	    System.out.println("|   3. Exit                             |");
+	    System.out.println("=========================================");
 		
 	}
 	
@@ -147,6 +150,8 @@ public class FilmQueryApp {
 	        } else {
 	            System.out.println("\tNo inventory items found");
 	        }
+	        System.out.println();
+	        System.out.println();
 	    } else {
 	        // Print basic details of the film
 	        System.out.println("Title: " + film.getTitle());
@@ -154,8 +159,17 @@ public class FilmQueryApp {
 	        System.out.println("Rating: " + film.getRating());
 	        System.out.println("Description: " + film.getDescription());
 	        System.out.println("Language: " + film.getLanguage());
-	        System.out.println("Cast: " + film.getActors());
-	       
+	        System.out.print("Cast:");
+	        if (film.getActors() != null && !film.getActors().isEmpty()) {
+	            for (Actor actor : film.getActors()) {
+	                System.out.print(actor); // uses the Actor class's toString() method but gets rid of commas and brackets
+	            }
+	        } else {
+	            System.out.println("\tNo actors found");
+	        }
+	        System.out.println();
+	        System.out.println();
+	        System.out.println();
 	    }
 	}
 	
