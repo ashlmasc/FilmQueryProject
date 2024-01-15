@@ -92,7 +92,7 @@ public class FilmQueryApp {
 	            displayFilmDetails(film, true);
 	            break;
 	        default:
-	            System.out.println("Invalid option. Please try again.");
+	            System.out.println("Invalid option. Please try again.\n");
 	            showFilmSubmenu(input, film); // Re-prompt if invalid option
 	            break;
 	    }

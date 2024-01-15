@@ -170,7 +170,7 @@ public class Film {
 		.append("\nDescription: ").append(description)
 		.append("\nRelease Year: ").append(releaseYear)
 		.append("\nLanguage ID: ").append(languageId)
-		.append("\nRental Duration: ").append(rentalDuration)
+		.append("\nRental Duration: ").append(rentalDuration).append(" days")
 		.append("\nRental Rate: ").append("$").append(rentalRate)
 		.append("\nLength: ").append(length).append(" minutes")
 		.append("\nReplacement Cost: ").append("$").append(replacementCost)
